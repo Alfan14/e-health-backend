@@ -3,8 +3,11 @@ import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/
 import { CreateCatDto} from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 import { ListAllEntities} from './dto/list-all-entities';
+
 @Controller('cats')
 export class CatsController {
+  
+  // HTTP request
   @Post()
   create(@Body() createCatDto: CreateCatDto) {
     return 'This action adds a new cat';
