@@ -6,7 +6,7 @@ export function createDatabaseProviders(
     entities: Function[],
   ) {
     const options: DataSourceOptions = {
-      type:configService.get<string>('DB_TYPE') as any,
+      type:configService.get<string>('POSTGRES_TYPE') as any,
       host:configService.get<string>('POSTGRES_HOST'),
       port:configService.get<number>('POSTGRES_PORT'),
       username:configService.get<string>('POSTGRES_USER'),
