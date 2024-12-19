@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,7 +8,7 @@ import { CatsService } from './cats/cats.service';
 import { UsersModule } from './users/users.module';
 import { CatsModule } from './cats/cats.module';
 import { DatabaseModule } from './database/database.module';
-import { DatabaseService } from './database/database.service'
+import { DatabaseService } from './database/database.service';
 import { User } from './users/entities/user.entity';
 
 
