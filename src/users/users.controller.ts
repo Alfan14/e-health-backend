@@ -8,7 +8,6 @@ import { User } from './entities/user.entity'
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-
   // Get all users
   @Get()
   async findAll(): Promise<User[]> {

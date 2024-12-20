@@ -1,39 +1,33 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 @Module({})
 export class DatabaseModule {
   static forRoot(entities = [], options?): DynamicModule {
-    const providers = [
-      {
-        provide: 'DATABASE_CONNECTION',
-        useFactory: async (configService: ConfigService) => {
-          const dbHost = configService.get<string>('DB_HOST');
-          const dbPort = configService.get<number>('DB_PORT');
-          const dbUser = configService.get<string>('DB_USER');
-          const dbPass = configService.get<string>('DB_PASS');
-          const dbName = configService.get<string>('DB_NAME');
-          
-          return {
-            type: 'postgres',
-            host: dbHost,
-            port: dbPort,
-            username: dbUser,
-            password: dbPass,
-            database: dbName,
-            entities,
-            synchronize: true,
-          };
-        },
-        inject: [ConfigService],
-      },
-    ];
-
     return {
       module: DatabaseModule,
-      providers: providers,
-      exports: providers,
+      imports: [
+        ConfigModule, 
+        TypeOrmModule.forRootAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: async (configService: ConfigService) => ({
+            type: 'postgres',
+            host: configService.get<string>('DB_HOST'),
+            port: configService.get<number>('DB_PORT'),
+            username: configService.get<string>('DB_USER'),
+            password: configService.get<string>('DB_PASS'),
+            database: configService.get<string>('DB_NAME'),
+            entities: entities,
+            synchronize: configService.get<boolean>('DB_SYNC', true),
+            ...options, 
+          }),
+        }),
+      ],
     };
   }
 }
+
 
 
