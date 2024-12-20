@@ -9,6 +9,5 @@ export class DatabaseService {
     const dbUser = this.configService.get<string>('DB_USER');
     const dbPass = this.configService.get<string>('DB_PASS');
     const dbName = this.configService.get<string>('DB_NAME');
-
   }
 }
