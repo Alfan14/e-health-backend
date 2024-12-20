@@ -14,6 +14,7 @@ import { UsersService } from './users/users.service';
 
 import * as dotenv from 'dotenv';
 import { join } from 'path';
+import { HospitalsModule } from './hospitals/hospitals.module';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { join } from 'path';
     UsersModule,
     CatsModule,
     DatabaseModule.forRoot([User], {}),
+    HospitalsModule,
   ],
   controllers: [AppController, CatsController ],
   providers: [AppService, CatsService, DatabaseService ],
