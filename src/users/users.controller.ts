@@ -14,15 +14,15 @@ export class UsersController {
     return this.usersService.findAll();
   }
   // Get specific users
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<User> {
-    const user = await this.usersService.findOne(id);
-    if (!user) {
-      throw new NotFoundException('User does not exist!');
-    } else {
-      return user;
-    }
-  }
+  // @Get(':id')
+  // async findOne(@Param('id') id: number): Promise<User> {
+  //   const user = await this.usersService.findOne(id);
+  //   if (!user) {
+  //     throw new NotFoundException('User does not exist!');
+  //   } else {
+  //     return user;
+  //   }
+  // }
 
   // Create users
   @Post()
@@ -37,13 +37,13 @@ export class UsersController {
   }
 
   // Delete specific users
-  @Delete(':id')
-  async delete(@Param('id') id: number): Promise<any> {
-    //handle error if user does not exist
-    const user = await this.usersService.findOne(id);
-    if (!user) {
-      throw new NotFoundException('User does not exist!');
-    }
-    return this.usersService.delete(id);
-    }
+  // @Delete(':id')
+  // async delete(@Param('id') id: number): Promise<any> {
+  //   //handle error if user does not exist
+  //   const user = await this.usersService.findOne(id);
+  //   if (!user) {
+  //     throw new NotFoundException('User does not exist!');
+  //   }
+  //   return this.usersService.delete(id);
+  //   }
   }
