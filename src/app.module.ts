@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module ,NestModule, RequestMethod, MiddlewareConsumer} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
@@ -9,10 +10,6 @@ import { CatsModule } from './cats/cats.module';
 import { DatabaseModule } from './database/database.module';
 import { DatabaseService } from './database/database.service';
 import { User } from './users/entities/user.entity';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
-
-import * as dotenv from 'dotenv';
 import { join } from 'path';
 import { HospitalsModule } from './hospitals/hospitals.module';
 import { AuthModule } from './auth/auth.module';
@@ -31,7 +28,13 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController, CatsController ],
-  providers: [AppService, CatsService, DatabaseService ],
+  providers: [AppService, CatsService, DatabaseService],
   exports: [DatabaseModule],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(CatsController);
+  }
+}

@@ -60,3 +60,6 @@ src/database/connection-provider.ts
 
 # constants
 src/auth/constants.ts
+
+# test users
+test/users.e2e-spec.ts
