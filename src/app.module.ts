@@ -13,6 +13,7 @@ import { User } from './users/entities/user.entity';
 import { join } from 'path';
 import { HospitalsModule } from './hospitals/hospitals.module';
 import { AuthModule } from './auth/auth.module';
+import { Hospital } from './hospitals/hospital/hospital.entity';
 
 
 @Module({
@@ -23,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersModule,
     CatsModule,
-    DatabaseModule.forRoot([User], {}),
+    DatabaseModule.forRoot([User,Hospital], {}),
     HospitalsModule,
     AuthModule,
   ],
