@@ -11,25 +11,29 @@ import { UserAuth } from './entities/user-auth.entity';
 export class UsersService {
   private readonly users = [
     {
-      userId: 1,
+      id: 1,
       username: 'john',
       email : 'john@gmail.com',
       password: 'changeme',
     },
     {
-      userId: 2,
+      id: 2,
       username: 'maria',
       email : 'maria@gmail.com',
       password: 'guess',
     },
   ];
-  async findOne(username: string): Promise<UserAuth | undefined> {
+  async findOne(username: string): Promise<User | undefined> {
     return this.users.find(user => user.username === username);
   }
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
+
+  async findById(id: number): Promise<User> {
+    return this.userRepository.findOne({ where: { id } });
+  }
 
   async create(user: Partial<User>): Promise<User> {
     const newuser = this.userRepository.create(user);
@@ -39,7 +43,6 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
-  
   
   async update(id: number, user: Partial<User>): Promise<User> {
     await this.userRepository.update(id, user);

@@ -63,3 +63,7 @@ src/auth/constants.ts
 
 # test users
 test/users.e2e-spec.ts
+
+# Docker
+docker-compose.yml
+Dockerfile
