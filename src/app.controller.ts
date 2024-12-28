@@ -1,5 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Roles } from './decorators/roles.decorator';
+import { Controller, Get, UseGuards ,  } from '@nestjs/common';
 import { AppService } from './app.service';
+
+
 
 @Controller()
 export class AppController {
@@ -9,4 +12,6 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  
 }

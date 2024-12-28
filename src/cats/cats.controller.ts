@@ -1,8 +1,12 @@
 
-import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Controller, Get, Query, Post, Body, Put, Param, Delete,UseGuards ,} from '@nestjs/common';
 import { CreateCatDto , UpdateCatDto, ListAllEntities } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
+import {Role} from 'src/enums/role.enum';
+import {AuthGuard} from 'src/guards/auth.guard';
+import {RoleGuard} from 'src/guards/role.guard';
 
 @Controller('cats')
 export class CatsController {
@@ -32,5 +36,19 @@ export class CatsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return `This action removes a #${id} cat`;
+  }
+  // Roles 
+  @Get('admin')
+  @Roles(Role.ADMIN) 
+  @UseGuards(AuthGuard, RoleGuard) 
+  async adminOnlyEndpoint() {
+    return "Welcome admin";
+  }
+
+  @Get('user-moderator')
+  @Roles(Role.USER, Role.MODERATOR) 
+  @UseGuards(AuthGuard, RoleGuard)  
+  async userModeratorEndpoint() {
+    return "Welcome user or moderator";
   }
 }

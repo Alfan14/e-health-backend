@@ -14,6 +14,8 @@ import { join } from 'path';
 import { HospitalsModule } from './hospitals/hospitals.module';
 import { AuthModule } from './auth/auth.module';
 import { Hospital } from './hospitals/hospital/hospital.entity';
+import { AccessContorlService } from 'src/shared/access-control.service';
+
 
 
 @Module({
@@ -29,7 +31,7 @@ import { Hospital } from './hospitals/hospital/hospital.entity';
     AuthModule,
   ],
   controllers: [AppController, CatsController ],
-  providers: [AppService, CatsService, DatabaseService],
+  providers: [AppService, CatsService, DatabaseService , AccessContorlService],
   exports: [DatabaseModule],
 })
 export class AppModule implements NestModule {
