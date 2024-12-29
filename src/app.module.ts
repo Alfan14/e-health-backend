@@ -15,6 +15,8 @@ import { HospitalsModule } from './hospitals/hospitals.module';
 import { AuthModule } from './auth/auth.module';
 import { Hospital } from './hospitals/hospital/hospital.entity';
 import { AccessContorlService } from 'src/shared/access-control.service';
+import { BedManagerModule } from './bed/bed-manager.module';
+import { BedManagerService } from './bed/bed-manager.service';
 
 
 
@@ -24,6 +26,7 @@ import { AccessContorlService } from 'src/shared/access-control.service';
       envFilePath: join(__dirname, '../.env'),
       isGlobal: true, 
     }),
+    BedManagerModule,
     UsersModule,
     CatsModule,
     DatabaseModule.forRoot([User,Hospital], {}),
@@ -31,7 +34,7 @@ import { AccessContorlService } from 'src/shared/access-control.service';
     AuthModule,
   ],
   controllers: [AppController, CatsController ],
-  providers: [AppService, CatsService, DatabaseService , AccessContorlService],
+  providers: [AppService, CatsService, DatabaseService , AccessContorlService ],
   exports: [DatabaseModule],
 })
 export class AppModule implements NestModule {
