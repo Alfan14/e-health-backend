@@ -1,13 +1,18 @@
-import { Controller, Get, Post, Body, Put, Param, Delete , NotFoundException} from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param,Res, Delete , HttpStatus, NotFoundException} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto ,  UserProfileDto} from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity'
+import { User } from './entities/user.entity';
+import { JwtService } from '@nestjs/jwt'
 
-@Controller('users')
+
+@Controller('/api/v1/user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
-
+  constructor(private readonly usersService: UsersService,
+    private jwtService: JwtService
+  ) {
+    
+  }
   // Get all users
   @Get()
   async findAll(): Promise<User[]> {
@@ -46,4 +51,19 @@ export class UsersController {
     }
     return this.usersService.delete(id);
     }
+
+    // Login page
+  @Post('/signup')
+  async Signup(@Res() response, @Body() user: User) {
+      const newUSer = await this.usersService.signup(user);
+      return response.status(HttpStatus.CREATED).json({
+          newUSer
+      })
   }
+  @Post('/signin')
+  async SignIn(@Res() response, @Body() user: User) {
+      const token = await this.usersService.signin(user, this.jwtService);
+      return response.status(HttpStatus.OK).json(token)
+  }
+  }
+  
