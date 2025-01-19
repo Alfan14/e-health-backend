@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { JwtModule } from '@nestjs/jwt';
-import { secret } from '../utils/constants';
+import { secret } from '../../utils/constants';
 import { join } from 'path';
 
 

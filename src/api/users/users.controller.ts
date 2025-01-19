@@ -6,7 +6,7 @@ import { User } from './entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 
 
-@Controller('/api/v1/user')
+@Controller('/api/user')
 export class UsersController {
   constructor(private readonly usersService: UsersService,
     private jwtService: JwtService

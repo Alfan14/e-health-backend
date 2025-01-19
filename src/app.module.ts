@@ -5,16 +5,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { DatabaseService } from './database/database.service';
-import { User } from './users/entities/user.entity';
+import { User } from './api/users/entities/user.entity';
 import { join } from 'path';
 import { HospitalsModule } from './hospitals/hospitals.module';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './api/auth/auth.module';
 import { Hospital } from './hospitals/hospital/hospital.entity';
 import { AccessContorlService } from 'src/shared/access-control.service';
 import { BedManagerModule } from './bed/bed-manager.module';
 import { BedManagerService } from './bed/bed-manager.service';
-import { UsersController } from './users/users.controller';
-import { UsersModule } from './users/users.module';
+import { UsersController } from './api/users/users.controller';
+import { UsersModule } from './api/users/users.module';
 
 
 
