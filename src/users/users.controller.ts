@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto ,  UserProfileDto} from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { JwtService } from '@nestjs/jwt'
+import { JwtService } from '@nestjs/jwt';
 
 
 @Controller('/api/v1/user')
